@@ -16,6 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,15 +26,15 @@ public class Reply {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(nullable = false,length = 200)
+	@Column(nullable = false, length = 200)
 	private String content;
-	
+
 	// 여러개의 댓글은 하나의 게시글에 존재할수있다.
 	@ManyToOne // Many == Reply, One == Board
 	@JoinColumn(name = "boardId")
 	private Board board;
-	
-	// 하나의 댓글에 여러명의 유저가 작성하지 못한다.
+
+	//여러개의 댓글은 하나의 user가 달수있다.
 	@ManyToOne // Many == Reply, One == User
 	@JoinColumn(name = "userId") // userId이름으로 join해라 (즉 테이블의 컬럼명이 userId)
 	private User user;
