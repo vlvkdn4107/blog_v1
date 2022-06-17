@@ -20,9 +20,11 @@
 	    <input type="email" class="form-control" placeholder="Enter email" id="email" />
 	  </div>
 	  
-	  <button type="button" class="btn btn-primary">Join</button>
+	  <button id = "btn-save" type="button" class="btn btn-primary">Join</button>
 	</form>
 </div>
 <br/>
+
+<script src="/blog/js/user.js"></script>
 
 <%@ include file= "../layout/footer.jsp"%>
