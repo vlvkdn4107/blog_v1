@@ -41,7 +41,7 @@ public class Board {
 	
 	// 여러개의 게시글은 하나의 User를 가진다. 반대로 하나의 게시글은 여러명의 User를 가질수 없다.
 	@ManyToOne(fetch = FetchType.EAGER) // 연관관계 
-	// Many == board, One == User 
+	// Many == board, One == User  
 	// fetchType.EAGER는 Board select 할때 한번에 데이터를 가져와
 	@JoinColumn(name = "userId") // 조인해서 들고와라 이름은 userId로 즉 join 컴럼명(as)은 userId이다
 	private User userId;
