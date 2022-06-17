@@ -19,11 +19,13 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+     
   </head>
   <body>
+    
     <nav class="navbar navbar-expand-md bg-dark navbar-dark">
       <!-- Brand -->
-      <a class="navbar-brand" href="#">블로그</a>
+      <a class="navbar-brand" href="/blog">블로그</a>
 
       <!-- Toggler/collapsibe Button -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -34,14 +36,17 @@
       <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="#">로그인</a>
+            <a class="nav-link" href="/blog/user/login_form">로그인</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">회원가입</a>
+            <a class="nav-link" href="/blog/user/join_form">회원가입</a>
  
         </ul>
       </div>
     </nav>
     <br />
+    <!-- body 부분이 생성되고 밑으로 흐름을 따라내려오기때문에 마지막에 해줘야한다 이게 인터프린터이다 
+     자바스크립트는 반정도의 컴파일과정을 거친다. 이유는 성능개선을 위해서 구글이 해놓음-->
+ 
 </body>
 </html>
