@@ -1,4 +1,4 @@
-package com.tencoding.blog.contoller;
+package com.tencoding.blog.test;
 
 import java.util.List;
 

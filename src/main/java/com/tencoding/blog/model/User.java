@@ -29,7 +29,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // 프로젝트에 연결된 DB의 넘버링 전략을 따라가겠다.
 	private int id;
 	@Column(nullable = false, length = 30) // null이 안되고 최대 30자까지
-	private String userName;
+	private String username;
 	@Column(nullable = false, length = 100)
 	private String password;
 	@Column(nullable = false, length = 50)

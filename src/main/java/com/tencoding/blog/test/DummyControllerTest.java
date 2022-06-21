@@ -1,4 +1,4 @@
-package com.tencoding.blog.contoller;
+package com.tencoding.blog.test;
 
 import java.util.List;
 
@@ -33,7 +33,7 @@ public class DummyControllerTest {
 	@PostMapping("/dummy/join")
 	public String join(@RequestBody User user) {
 		System.out.println("========================");
-		System.out.println(user.getUserName());
+//		System.out.println(user.getUserName());
 		System.out.println(user.getPassword());
 		System.out.println(user.getEmail());
 		System.out.println("========================");

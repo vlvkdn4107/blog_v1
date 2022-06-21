@@ -9,4 +9,8 @@ import com.tencoding.blog.model.User;
 // DAO
 public interface UserRepository extends JpaRepository<User, Integer>{
 	
+	// insert
+	// select
+	// update
+	// delete
 }
