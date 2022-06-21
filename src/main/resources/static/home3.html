@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>속성값 변경 하기.</h2>
+	<img id="image" alt="" src="/blog/img.jpg" width="150" height="150">
+	<br/>
+	<button id =" btn-img">이미지 변겅</button>
+	<script type="text/javascript">
+		document.getElementById("btn-img").onclick=function(){
+			alert("이미지를 변경 예정");
+			document.getElementById("image").src = "/blog/img2.jpg";
+		};
+	</script>
+</body>
+</html>

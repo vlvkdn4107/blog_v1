@@ -38,7 +38,7 @@ public class User {
 //	@ColumnDefault("'user'") // null이면 user을 반환하라// Enum 타입 사용을 권장한다. : admin, user, manager 같은 걸 넣을거다.
 	// Enum 타입 쓰는 이유 DOMAIN - 데이터의 범주화(User, ueer 이렇게 잘 못 쓸수가있다) 때문이다.
 	@Enumerated(EnumType.STRING)// enum 클래스로 만들었기 때문에 알려줘야한다!
-	private RoleType1 role;
+	private RoleType role;
 	@CreationTimestamp // 시간이 자동으로 입력된다.
 	private Timestamp createDate;
 
