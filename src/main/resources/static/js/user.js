@@ -1,9 +1,8 @@
+<<<<<<< HEAD
 // "use strict"    // 전체 스크립트를 strict(엄격모드) 모드로 설정함.
+=======
+>>>>>>> parent of 7ad8b3f (제이쿼리 연습)
 // index = 오브젝트 {안에는 변수}
-// let = 함수 밖에서 쓰면 멤버변수 함수 안에쓰면 지역변수
-
-
-
 let index = {
 	init: function(){
 		$("#btn-save").bind("click", () =>{
