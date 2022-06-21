@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function validateForm(){
+		let x = document.forms["myform"]["fname"].value;
+		if(x==""){
+			alert("값을 입력해주세요.");
+			return false;
+		}
+	}
+</script>
+</head>
+<body>
+	<h2>JS 벨리데이션</h2>
+	<form name="myform" action="" method="get" onsubmit="return validateForm()">
+		name: <input type="text" name ="fname">
+			  <input type="submit" value = "제출">
+	</form>
+</body>
+</html>
