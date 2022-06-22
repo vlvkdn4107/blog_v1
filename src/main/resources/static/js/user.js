@@ -10,6 +10,10 @@ let index = {
 			alert("btn-save 버튼이 눌러 졌습니다.");
 			this.save();
 		});
+		$("#btn-login").bind("click", () =>{
+			alert("btn-save 버튼이 눌러 졌습니다.");
+			this.login();
+		});
 	},
 	save: function(){
 		let data = {
@@ -41,6 +45,29 @@ let index = {
 			console.log(xhr);
 			alert("회원가입이 실패 되었습니다.");
 		});
+	},
+	login: function(){
+		let data = {
+			username: $("username").val(),
+			password: $("password").val()
+		}
+		// ajax 호출
+		$.ajax({
+			// 회원 로그인 요청!
+			//Get으로 할수는있지만 히스토리에 남기때문에 보안의 문제가 생긴다.
+			type: "POST",
+			url: "/blog/api/user/login",
+			data: JSON.stringify(data),
+			contentType: "application/json; charset=utf-8",
+			dataType: "json" 
+		}).done(function(data, textStatus, xhr){
+			alert("로그인이 성공 되었습니다.")
+			location.href = "/blog"
+			console.log(data);
+		}).fail(function(error){
+			alert("로그인 실패 했습니다.")
+			console.log(error);
+		});  
 		
 	}
 	

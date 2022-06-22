@@ -15,8 +15,9 @@
 	    <label class="form-check-label"> 
 	    <input class="form-check-input" type="checkbox" /> Remember me </label>
 	  </div>
-	  <button type="button" class="btn btn-primary">Log in</button>
 	</form>
+	<button id ="btn-login"type="button" class="btn btn-primary">Log in</button>
 </div>
 <br/>
+<script src="/blog/js/user.js"></script>
 <%@ include file= "../layout/footer.jsp"%>

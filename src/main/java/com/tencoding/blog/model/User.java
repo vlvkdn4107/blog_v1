@@ -28,7 +28,7 @@ public class User {
 	@Id // 프라이머리키
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // 프로젝트에 연결된 DB의 넘버링 전략을 따라가겠다.
 	private int id;
-	@Column(nullable = false, length = 30) // null이 안되고 최대 30자까지
+	@Column(nullable = false, length = 30, unique = true) // null이 안되고 최대 30자까지 unique 보존성 (같은 이름으로 회원가입 안됌!)
 	private String username;
 	@Column(nullable = false, length = 100)
 	private String password;

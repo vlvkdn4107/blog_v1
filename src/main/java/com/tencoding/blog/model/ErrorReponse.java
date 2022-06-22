@@ -2,6 +2,8 @@ package com.tencoding.blog.model;
 
 import java.util.List;
 
+import com.tencoding.blog.dto.CustomError;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
