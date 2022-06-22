@@ -10,8 +10,11 @@ let index = {
 			alert("btn-save 버튼이 눌러 졌습니다.");
 			this.save();
 		});
-		$("#btn-login").bind("click", () =>{
-			alert("btn-save 버튼이 눌러 졌습니다.");
+		//$("#btn-login").bind("click", () =>{
+			//alert("btn-save 버튼이 눌러 졌습니다.");
+			//this.login();
+		//});
+		$("#btn-login").bind("click",() =>{
 			this.login();
 		});
 	},
@@ -51,7 +54,7 @@ let index = {
 			username: $("username").val(),
 			password: $("password").val()
 		}
-		// ajax 호출
+		 //ajax 호출
 		$.ajax({
 			// 회원 로그인 요청!
 			//Get으로 할수는있지만 히스토리에 남기때문에 보안의 문제가 생긴다.
@@ -70,7 +73,6 @@ let index = {
 		});  
 		
 	}
-	
 }
 
 index.init();

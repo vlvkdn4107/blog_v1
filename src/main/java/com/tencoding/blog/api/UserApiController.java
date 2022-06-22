@@ -17,7 +17,9 @@ import com.tencoding.blog.service.UserService;
 public class UserApiController {
 	
 	@Autowired
-	UserService userservice;
+	private UserService userservice;
+	@Autowired // 원래 제공하는 기능
+	private HttpSession httpSession;
 	
 	@PostMapping("/api/user")
 	public ResponseDto<Integer> save(@RequestBody User user) {
@@ -29,7 +31,7 @@ public class UserApiController {
 	}
 	
 	@PostMapping("/api/user/login")
-	public ResponseDto<Integer> login(@RequestBody User user, HttpSession session){
+	public ResponseDto<Integer> login(@RequestBody User user){
 		System.out.println("login 호출됨");
 		// 서비스한테 요청하기
 		// principal : 접근 추제
@@ -37,9 +39,10 @@ public class UserApiController {
 		// 여기까지 왔으면 정상적으로 접근 주체가 username, password 확인이 된거다. (세션이라는 거대한 메모리에 저장 해야한다)
 		if(principal != null) {
 			// null이 아닐때만 저장할수있게 방어적 코드
-			session.setAttribute("principal", principal);		
+			httpSession.setAttribute("principal", principal);		
 			System.out.println("세션 정보가 저장되었습니다.");
 		}
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
+	
 }

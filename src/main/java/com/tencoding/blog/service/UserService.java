@@ -46,4 +46,6 @@ public class UserService {
 		// 서비느느 레파지토리한테 select 시켜야한다.
 		return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
 	}
+	
+
 }
