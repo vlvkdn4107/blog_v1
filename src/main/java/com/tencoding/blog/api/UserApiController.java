@@ -18,8 +18,9 @@ public class UserApiController {
 	private UserService userservice;
 
 	@PostMapping("/auth/joinProc")
-	public ResponseDto<Integer> save(@RequestBody User user){
-		user.setRole(RoleType.USER);
+	// 기본 데이터 파싱 전략 key=value
+	// application/X-www-from-urlencoded;charset=UTF-8 // key = value
+	public ResponseDto<Integer> save(User user){ // JSON으로  던지기 위해서는 @RequestBody를 쓰는데 아니기 때문에 안쓴다.
 		int result = userservice.saveUser(user);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), result);
 	}

@@ -30,7 +30,7 @@ let index = {
 		$.ajax({
 			// 서버측에 회원가입 요청
 			type: "POST",
-			url: "/api/user",
+			url: "/auth/joinProc",
 			// json 형식으로 만들어주는 함수
 			data: JSON.stringify(data),
 			contentType: "application/json; charset=utf-8",

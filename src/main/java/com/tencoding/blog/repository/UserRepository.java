@@ -17,6 +17,7 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	// SELECT * FROM user WHERE username = ?1 AND password = ?2;
 	// 대소문자를 엄격하게 지켜줘야한다.
 	// 이렇게 하면 쿼리가 만들어진다.
-	User findByUsernameAndPassword(String username, String password);
+//	User findByUsernameAndPassword(String username, String password);
+	 
 	
 }

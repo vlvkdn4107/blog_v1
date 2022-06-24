@@ -3,9 +3,11 @@ package com.tencoding.blog.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tencoding.blog.model.RoleType;
 import com.tencoding.blog.model.User;
 import com.tencoding.blog.repository.UserRepository;
 
@@ -27,12 +29,23 @@ public class UserService {
 	// DI 의존 주입!
 	@Autowired // 자동으로 초기화
 	private UserRepository userRepository;
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
+	
 	@Transactional
 	public int saveUser(User user) {
 		// select
 		// update
 		// insert
 		try {
+			String rawPassword = user.getPassword();
+			
+			// SHA-512 로 암호화 한거다.
+			String encPassword = encoder.encode(rawPassword);
+			
+			user.setPassword(encPassword);
+			user.setRole(RoleType.USER);
 			userRepository.save(user);
 			
 		} catch (Exception e) {
