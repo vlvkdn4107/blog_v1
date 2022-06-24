@@ -30,7 +30,7 @@ let index = {
 		$.ajax({
 			// 서버측에 회원가입 요청
 			type: "POST",
-			url: "/blog/api/user",
+			url: "/api/user",
 			// json 형식으로 만들어주는 함수
 			data: JSON.stringify(data),
 			contentType: "application/json; charset=utf-8",
@@ -42,7 +42,7 @@ let index = {
 			console.log("textStatus :" + textStatus);
 			console.log("data :" + data);
 		    alert("회원가입이 완료 되었습니다.");
-		    location.href = "/blog";
+		    location.href = "/";
 		}).fail(function(xhr){
 			// 통신 실패시 
 			console.log(xhr);
@@ -51,21 +51,21 @@ let index = {
 	},
 	login: function(){
 		let data = {
-			username: $("username").val(),
-			password: $("password").val()
+			username: $("#username").val(),
+			password: $("#password").val()
 		}
 		 //ajax 호출
 		$.ajax({
 			// 회원 로그인 요청!
 			//Get으로 할수는있지만 히스토리에 남기때문에 보안의 문제가 생긴다.
 			type: "POST",
-			url: "/blog/api/user/login",
+			url: "/api/user/login",
 			data: JSON.stringify(data),
 			contentType: "application/json; charset=utf-8",
 			dataType: "json" 
 		}).done(function(data, textStatus, xhr){
 			alert("로그인이 성공 되었습니다.")
-			location.href = "/blog"
+			location.href = "/"
 			console.log(data);
 		}).fail(function(error){
 			alert("로그인 실패 했습니다.")
