@@ -34,18 +34,19 @@ public class UserService {
 		// insert
 		try {
 			userRepository.save(user);
-			return 1;
+			
 		} catch (Exception e) {
 			e.printStackTrace();
+			return -1;
 		}
-		return -1;
+		return 1;
 	}
 	
-	@Transactional(readOnly = true)
-	public User login(User user) {
-		// 서비느느 레파지토리한테 select 시켜야한다.
-		return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
-	}
+//	@Transactional(readOnly = true)
+//	public User login(User user) {
+//		// 서비느느 레파지토리한테 select 시켜야한다.
+//		return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+//	}
 	
 
 }
