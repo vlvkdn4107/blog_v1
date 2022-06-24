@@ -26,7 +26,7 @@ public class UserController {
 			return "user/join_form";
 		}
 		
-		@GetMapping("/logout")
+		@GetMapping("/logout") 
 		public String logout() {
 			// 세션정보를 제거 (로그아웃 처리)
 			httpSession.invalidate();
