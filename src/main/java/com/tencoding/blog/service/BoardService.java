@@ -30,4 +30,9 @@ public class BoardService {
 	}
 	
 	
+	public Board boardDetail(int boardId) {
+		return boardRepository.findById(boardId).orElseThrow(() ->{
+			return new IllegalArgumentException("해당 글은 찾을 수 없습니다."); // 반드시 예외 처리해주자!
+		});
+	}
 }
