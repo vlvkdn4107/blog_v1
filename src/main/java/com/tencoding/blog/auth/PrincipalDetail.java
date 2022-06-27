@@ -14,9 +14,15 @@ import lombok.Data;
 public class PrincipalDetail implements UserDetails{
 
 	/**
-	 * 
+	 *  모든 Class는 UID(고유 식별자)를 가지고 있다.
+	 *  Class의 내용이 변경되면 UID값 역시 같이 변경 됩니다.
+	 *  직렬화 하여 통신하고. UID값으로 통신한게 정상인지 확인을 하는데 
+	 *  그 값이 바뀌게 되면 다른 class로 인식을 해버리게 된다.
+	 *  이를 방지 하기 위해서 UID으로 미리 명시를 해주는 부분이
+	 *  serialVersionUID 이 녀석 이다.
+	 *  반드시 해야하는 필수조건은 아니지만 권장한다.
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L; // 직렬화 
 	
 	private User user; // 콤포지션 관계
 
