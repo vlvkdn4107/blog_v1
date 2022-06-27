@@ -3,6 +3,9 @@ let index ={
 		$("#btn-save").bind("click",() =>{
 			this.save();
 		});
+		$("#btn-delete").bind("click",() =>{
+			this.deleteById();
+		});
 	},
 	save: function(){
 		// 데이터 가져오기.
@@ -29,6 +32,24 @@ let index ={
 		.fali(function(error){
 			alert("글쓰기 실패!");
 		});
+	},
+	deleteById: function(){
+		let id = $("#board-id").text(); // .text 컨텐츠안에있는 text 놈을 들고온다.
+			$.ajax({
+				type: "DELETE",
+				url: "/api/board/" + id
+			})
+			.done(function(data){
+				if(data.status){
+				alert("글 삭제 성공!");
+				location.href = "/";	
+				}
+				
+			})
+			.fail(function(){
+				alert("글 삭제 실패!");
+			});
+		
 	}
 }
 
