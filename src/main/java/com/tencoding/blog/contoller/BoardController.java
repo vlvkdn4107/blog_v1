@@ -42,4 +42,10 @@ public class BoardController {
 		return "/board/detail";
 	}
 	
+	@GetMapping("/board/{id}/update_form")
+	public String updateForm(@PathVariable int id, Model model) {
+		// todo 서비스 만들어주기 (서비스 클래스에서)
+		model.addAttribute("board", boardService.boardDetail(id));
+		return "/board/update_form";
+	}
 }

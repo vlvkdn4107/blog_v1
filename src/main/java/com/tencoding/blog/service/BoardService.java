@@ -34,10 +34,24 @@ public class BoardService {
 		return boardRepository.findById(boardId).orElseThrow(() ->{
 			return new IllegalArgumentException("해당 글은 찾을 수 없습니다."); // 반드시 예외 처리해주자!
 		});
+	
 	}
 	
 	@Transactional
 	public void deleteById(int id) {
 		boardRepository.deleteById(id);
+	}
+	
+	@Transactional
+	public void modifyBoard(int id, Board board) {
+		// 기존에 있던 title, content 불러오기
+		Board boardEntity = boardRepository.findById(id).orElseThrow(() ->{
+			return new IllegalArgumentException("해당 글은 찾을 수 없습니다."); // 반드시 예외 처리해주자!
+		}); 
+		// 불러온 title, content를 수정하기
+		boardEntity.setTitle(board.getTitle());
+		boardEntity.setContent(board.getContent());
+		
+		// 더티체킹 하기
 	}
 }
