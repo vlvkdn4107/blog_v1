@@ -23,4 +23,5 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	 
 	// SELECT * FROM user WHERE username = ?; << 이렇게 만들어 짐.
 	Optional<User> findByUsername(String username);
+	// (주의 findByUsername 잘 적어야한다.)
 }

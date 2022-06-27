@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.tencoding.blog.api.PrincipalDetailService;
+import com.tencoding.blog.auth.PrincipalDetailService;
 
 // 필터 만드는 클래스
 @Configuration // 빈 등록 (Iod)
@@ -23,6 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	public BCryptPasswordEncoder encodePWD() {
 		return new BCryptPasswordEncoder();
 	}
+	
 	
 	@Autowired
 	private PrincipalDetailService principalDetailService;
@@ -56,6 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		// 2. passwordEncoder 에 우리가 사용하는 해시 함수를 알려 줘야 한다.
 		auth.userDetailsService(principalDetailService) // 해당 DetailService에서 알아서 처리를 해줄거다.
 		.passwordEncoder(encodePWD());// encodePWD() 위에 만들었음!(해시 알고리즘을 통해서 해당 패스워드가 맞는지 확인을 해준다.
+		// 핵심 기능 !!username이 DB에 있는지 확인하고 해쉬코드로 된 패스워드를 확인해준다.
 
 	}
 	

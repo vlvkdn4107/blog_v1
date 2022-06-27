@@ -19,13 +19,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
 
     <!-- jQuery library -->
-    
-    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
     <!-- Popper JS -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
      
@@ -56,10 +52,10 @@
         		</c:when>
         		<c:otherwise>
         		 <li class="nav-item">
-		            <a class="nav-link" href="/board/form">글쓰기</a>
+		            <a class="nav-link" href="/board/save_form">글쓰기</a>
 		         </li>
 		         <li class="nav-item">
-		            <a class="nav-link" href="/user/form">회원 정보</a>
+		            <a class="nav-link" href="/user/update_form">회원 정보</a>
 		         </li>
 		         <li class="nav-item">
 		         <!-- 시큐리티를 적용하면 자동 로그아웃 처리가된다. -->
