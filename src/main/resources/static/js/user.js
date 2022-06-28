@@ -10,12 +10,14 @@ let index = {
 			alert("btn-save 버튼이 눌러 졌습니다.");
 			this.save();
 		});
+		// 전통적인 로그인 방식일때 사용한 부분
 		//$("#btn-login").bind("click", () =>{
 			//alert("btn-save 버튼이 눌러 졌습니다.");
 			//this.login();
 		//});
-		$("#btn-login").bind("click",() =>{
-			this.login();
+	
+		$("#btn-update").bind("click",() =>{
+			this.update();
 		});
 	},
 	save: function(){
@@ -24,7 +26,7 @@ let index = {
 			password: $("#password").val(),
 			email: $("#email").val()
 		}
-		// console.log(data);
+		
 		
 		// AJAX 호출
 		$.ajax({
@@ -49,29 +51,51 @@ let index = {
 			alert("회원가입이 실패 되었습니다.");
 		});
 	},
-	login: function(){
-		let data = {
-			username: $("#username").val(),
-			password: $("#password").val()
-		}
+//	login: function(){
+//		let data = {
+//			username: $("#username").val(),
+//			password: $("#password").val()
+//		}
 		 //ajax 호출
-		$.ajax({
+//		$.ajax({
 			// 회원 로그인 요청!
 			//Get으로 할수는있지만 히스토리에 남기때문에 보안의 문제가 생긴다.
-			type: "POST",
-			url: "/api/user/login",
-			data: JSON.stringify(data),
-			contentType: "application/json; charset=utf-8",
-			dataType: "json" 
-		}).done(function(data, textStatus, xhr){
-			alert("로그인이 성공 되었습니다.")
-			location.href = "/"
-			console.log(data);
-		}).fail(function(error){
-			alert("로그인 실패 했습니다.")
-			console.log(error);
-		});  
+//			type: "POST",
+//			url: "/api/user/login",
+//			data: JSON.stringify(data),
+//			contentType: "application/json; charset=utf-8",
+//			dataType: "json" 
+//		}).done(function(data, textStatus, xhr){
+//			alert("로그인이 성공 되었습니다.")
+//			location.href = "/"
+//			console.log(data);
+//		}).fail(function(error){
+//			alert("로그인 실패 했습니다.")
+//			console.log(error);
+//		});  
 		
+//	},
+	update: function(){
+		let data = {
+			id: $("#id").val(),
+			password: $("#password").val(),
+			email: $("#email").val()
+		}
+		console.log(data);
+		$.ajax({
+			type: "PUT",
+			url: "/user",
+			data : JSON.stringify(data),
+			contentType: "application/json; charset=utf-8",
+			dataType: "json"
+		})
+		.done(function(data){
+			alert("수정 성공!");
+			location.href = "/";
+		})
+		.fail(function(error){
+			alert("수정 실패!!");
+		});
 	}
 }
 

@@ -3,6 +3,7 @@ package com.tencoding.blog.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +24,12 @@ public class UserApiController {
 	public ResponseDto<Integer> save(User user){ // JSON으로  던지기 위해서는 @RequestBody를 쓰는데 아니기 때문에 안쓴다.
 		int result = userservice.saveUser(user);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), result);
+	}
+	
+	@PutMapping("/user")
+	public ResponseDto<Integer> update(@RequestBody User user){
+		userservice.updateUser(user);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 	
 	 

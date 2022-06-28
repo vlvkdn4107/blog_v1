@@ -55,6 +55,20 @@ public class UserService {
 		return 1;
 	}
 	
+	@Transactional
+	public void updateUser(User user) {
+		User userEntity = userRepository.findById(user.getId())
+				.orElseThrow(() -> {
+					return new IllegalArgumentException("회원 정보가 없습니다.");
+				});
+		// 해시 암호화 처리
+		String rawPassword = user.getPassword();
+		String hashPassword = encoder.encode(rawPassword);
+		userEntity.setPassword(hashPassword);
+		userEntity.setEmail(user.getEmail());
+		
+	}
+	
 //	@Transactional(readOnly = true)
 //	public User login(User user) {
 //		// 서비느느 레파지토리한테 select 시켜야한다.
