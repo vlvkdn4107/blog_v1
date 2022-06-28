@@ -4,6 +4,7 @@
 <div class = "container">
 	<form action="#" method="POST">
 	<input type="hidden" id ="id" value = "${principal.user.id}">
+
 		<div class ="form-group">
 			<label for="username">username:</label>
 			<input type="text" value="${principal.user.username}" name ="username" id = "username" class = "form-control" readonly="readonly">

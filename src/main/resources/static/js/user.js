@@ -77,6 +77,7 @@ let index = {
 //	},
 	update: function(){
 		let data = {
+			username: $("#username").val(),
 			id: $("#id").val(),
 			password: $("#password").val(),
 			email: $("#email").val()
@@ -92,6 +93,7 @@ let index = {
 		.done(function(data){
 			alert("수정 성공!");
 			location.href = "/";
+			console.log(data);
 		})
 		.fail(function(error){
 			alert("수정 실패!!");
