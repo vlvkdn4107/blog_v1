@@ -23,13 +23,7 @@ public class UserApiController {
 	@Autowired
 	private AuthenticationManager authenticationManager; // 미리 시큐리티에 올려놔야한다.@Bean 등록 (주의!)
 
-	@PostMapping("/auth/joinProc")
-	// 기본 데이터 파싱 전략 key=value
-	// application/X-www-from-urlencoded;charset=UTF-8 // key = value
-	public ResponseDto<Integer> save(User user){ // JSON으로  던지기 위해서는 @RequestBody를 쓰는데 아니기 때문에 안쓴다.
-		int result = userservice.saveUser(user);
-		return new ResponseDto<Integer>(HttpStatus.OK.value(), result);
-	}
+	
 	
 	@PutMapping("/user")
 	public ResponseDto<Integer> update(@RequestBody User user){
