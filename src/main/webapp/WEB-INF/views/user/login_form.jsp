@@ -17,6 +17,9 @@
 	    <input class="form-check-input" type="checkbox" /> Remember me </label>
 	  </div>
 	  <button id ="btn-login"type="submit" class="btn btn-primary">Log in</button>
+	  <a href="https://kauth.kakao.com/oauth/authorize?client_id=e328d258617af0d92f0569239ac4463d&redirect_uri=http://localhost:9090/auth/kakao/callback&response_type=code" >
+	  <img src ="/image/kakao_login.png" width = "74" height = "38"> 
+	  </a>
 	</form>
 	
 </div>

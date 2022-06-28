@@ -3,11 +3,25 @@ package com.tencoding.blog.contoller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tencoding.blog.dto.KakaoProfile;
+import com.tencoding.blog.dto.OAuthToken;
 import com.tencoding.blog.model.User;
 import com.tencoding.blog.service.UserService;
 
@@ -49,4 +63,87 @@ public class UserController {
 			int result = service.saveUser(user);
 			return "redirect:/"; // redirect로 페이지 이동 처리함
 		}
+		
+		@GetMapping("/auth/kakao/callback")
+		@ResponseBody
+		public String kakaoCallback(@RequestParam String code) {
+			//Retrofit2
+			//HTTPSURLConnect
+			//OKHttp
+			// 스프링에서는  RestTemplate  를 많이 쓴다
+			RestTemplate rt = new RestTemplate();
+			// http 메세지 ->  POST
+			// 시작줄
+			// http header
+			// http body
+			
+			//header 생성
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+			// body 생성
+			MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+			// 어떤 값을 넣어야 할까??????? (문서 확인)
+			params.add("grant_type", "authorization_code");
+			params.add("client_id", "e328d258617af0d92f0569239ac4463d");
+			params.add("redirect_uri", "http://localhost:9090/auth/kakao/callback");
+			params.add("code", code);
+			
+			// 헤더와 바디를 하나의 오브젝트로 담아야한다.
+			HttpEntity<MultiValueMap<String, String>> kakaoTokenRequest = new HttpEntity<>(params, headers);
+			 
+			// Http 요청 -> POST 방식 -> 응답을 받아야한다.
+			ResponseEntity<String> responseEntity = rt.exchange("https://kauth.kakao.com/oauth/token",
+					HttpMethod.POST,
+					kakaoTokenRequest,
+					String.class);
+			
+			// reponseEntity -> Object로 반환 (Gson, Json Simple, ObjectMapper)
+			// 파싱
+			OAuthToken authToken = null;
+			ObjectMapper mapper = new ObjectMapper();
+			// String --> Object로 변환 할려면 클래스를 생성해야한다.
+			try {
+				authToken = mapper.readValue(responseEntity.getBody(), OAuthToken.class);
+			} catch (JsonMappingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JsonProcessingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			// 엑세스 토큰 사용
+			RestTemplate rt2 = new RestTemplate();
+			HttpHeaders headers2 = new HttpHeaders();
+			// 주의 Bearer 다음에 무조건 한칸 띄우기!!!!!!!!!!!!!!!!!!!!
+			headers2.add("Authorization", "Bearer " + authToken.getAccessToken());
+			headers2.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+			// 바디 
+			HttpEntity<MultiValueMap<String, String>> kakaoProfileRequest = new HttpEntity<>(headers2);
+			ResponseEntity<String> reponse2 = rt2.exchange("https://kapi.kakao.com/v2/user/me", HttpMethod.POST, kakaoProfileRequest, String.class);
+		
+			// 단 위에 했던 방식으로 전환 (kakaoProfile.class)
+			KakaoProfile kakaoProfile = null;
+			ObjectMapper profile = new ObjectMapper();
+			
+			try {
+				kakaoProfile = profile.readValue(reponse2.getBody(), KakaoProfile.class);
+				System.out.println(kakaoProfile);
+			} catch (JsonMappingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JsonProcessingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			// 다시 POST로 보내야 한다.
+			// 인증서버로 통신을 해야한다.
+			
+			return "카카오 프로필 정보 요청 : " + kakaoProfile;
+		}		
+		
+		
 }

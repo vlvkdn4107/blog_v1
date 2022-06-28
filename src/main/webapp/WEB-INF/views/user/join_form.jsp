@@ -21,6 +21,7 @@
 	  </div>
 	  
 	  <button id = "btn-save" type="submit" class="btn btn-primary">Join</button> <!-- form으로 던지기 위해서는  type 을 submit으로 해야한다 -->
+	  
 	</form>
 </div>
 <br/>
