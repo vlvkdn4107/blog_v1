@@ -69,6 +69,13 @@ public class UserService {
 		
 	}
 	
+	@Transactional(readOnly = true)
+	public User searchUser(String username) {
+		User userEntity = userRepository.findByUsername(username).orElseGet(() -> {
+			return new User();
+		});
+		return userEntity;
+	}
 //	@Transactional(readOnly = true)
 //	public User login(User user) {
 //		// 서비느느 레파지토리한테 select 시켜야한다.
