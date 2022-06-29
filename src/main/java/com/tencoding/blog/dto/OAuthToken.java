@@ -8,8 +8,6 @@ import lombok.Data;
 @Data
 @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class OAuthToken {
-	
-	// 넘어 오는 방식으로 똑같이 하는게 더 좋다
 	private String accessToken;
     private String tokenType; 
     private String refreshToken;
