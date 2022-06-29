@@ -41,14 +41,16 @@
 	
 	
 	<ul class="list-group" id = "reply--box">
-		<li class = "list-group-item d-flex justify-content-between" id = "reply--1">
-			<div>댓글 내용</div>
+		<c:forEach val="reply" items ="${board.replys}">
+			<li class = "list-group-item d-flex justify-content-between" id = "reply--1">
+			<div>${reply.content}</div>
 			<div class ="d-flex">
-				<div>작성자 : 유저이름</div>
+				<div>작성자 : ${reply.user.username}</div>
 				<button class="badge badge-danger">삭제</button>
 			</div>
 		</li>
-		<!--  반복 예정 -->
+		</c:forEach>
+
 	</ul>
 	<br/>
 	<br/>

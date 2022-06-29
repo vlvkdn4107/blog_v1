@@ -52,7 +52,7 @@ public class Board {
 	// 하지만 mappedBy는 연관 관계에 주인이 아니다. 즉,FK가 아니다
 	// DB 에 컬럼을 만들지 마시오.
 	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
-	private List<Reply> reply;
+	private List<Reply> replys;
 	
 	
 	
