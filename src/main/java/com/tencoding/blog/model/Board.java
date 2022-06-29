@@ -3,6 +3,7 @@ package com.tencoding.blog.model;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -54,7 +55,7 @@ public class Board {
 	// mappedBy = "board" board는 reply 테이블에 필드이름이다.
 	// 하지만 mappedBy는 연관 관계에 주인이 아니다. 즉,FK가 아니다
 	// DB 에 컬럼을 만들지 마시오.
-	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties({"board"}) // Reply안에 있는 board getter를 무시 해라 (호출x)
 	@OrderBy("id DESC")
 	private List<Reply> reply;
