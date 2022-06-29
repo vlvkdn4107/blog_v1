@@ -109,10 +109,18 @@ let index ={
 		})
 		.done(function (response){
 			if(response.status){
+				addReplyElement(response.data); // 리스폰스에있는 data
+			}else{
+				
+			}
+			
+			console.log(response);
+			/*
+			if(response.status){
 				alert("댓글 쓰기 완료!!");	
 				location.href = (`/board/${data.boardId}`); 
 			}
-			
+			*/	
 		})
 		.fail(function(error){
 			alert("댓글 쓰기 실패!");
@@ -125,5 +133,21 @@ let index ={
 
 	}
 }
+function addReplyElement(reply){
+	let chileElement = `<li class="list-group-item d-flex justify-content-between" id="reply--1">
+	    	  <div>${reply.content}</div>
+	    	  <div class="d-flex">
+	    	    <div class = "m-2">작성자 : ${reply.user.username}&nbsp;&nbsp;</div>
+	    	    <button class="badge badge-danger m-2" id ="btn-reply-delete">삭제</button>
+	        
+	     	    <button class="badge badge-primary m-2"id ="btn-reply-update" >수정</button>
+	    	  </div>
+	  	</li>`;
+		
+	  	
+	  $("#reply--box").prepend(chileElement);	  
+	  	
+}
+
 
 index.init();
