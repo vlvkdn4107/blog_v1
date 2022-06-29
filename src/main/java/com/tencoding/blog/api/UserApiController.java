@@ -2,13 +2,16 @@ package com.tencoding.blog.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tencoding.blog.dto.ResponseDto;
-import com.tencoding.blog.model.RoleType;
 import com.tencoding.blog.model.User;
 import com.tencoding.blog.service.UserService;
 
@@ -18,17 +21,18 @@ public class UserApiController {
 	@Autowired
 	private UserService userservice;
 
-	@PostMapping("/auth/joinProc")
-	// 기본 데이터 파싱 전략 key=value
-	// application/X-www-from-urlencoded;charset=UTF-8 // key = value
-	public ResponseDto<Integer> save(User user){ // JSON으로  던지기 위해서는 @RequestBody를 쓰는데 아니기 때문에 안쓴다.
-		int result = userservice.saveUser(user);
-		return new ResponseDto<Integer>(HttpStatus.OK.value(), result);
-	}
+	@Autowired
+	private AuthenticationManager authenticationManager;
+	
+	
 	
 	@PutMapping("/user")
 	public ResponseDto<Integer> update(@RequestBody User user){
 		userservice.updateUser(user);
+		Authentication authentication = authenticationManager.authenticate(
+				new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword())
+				);
+		SecurityContextHolder.getContext().setAuthentication(authentication);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 	
