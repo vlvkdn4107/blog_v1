@@ -9,6 +9,16 @@ let index ={
 		$("#btn-update").bind("click",() =>{
 			this.update();
 		});
+		$("#btn-reply-save").bind("click",() =>{
+			this.replySave();
+		});
+		$("#btn-reply-delete").bind("click",() =>{
+			this.replyDelete();
+		});
+		$("#btn-reply-update").bind("click",() =>{
+			this.replyUpdate();
+		});
+		
 	
 		
 	},
@@ -34,7 +44,7 @@ let index ={
 			}
 			
 		})
-		.fali(function(error){
+		.fail(function(error){
 			alert("글쓰기 실패!");
 		});
 	},
@@ -79,6 +89,40 @@ let index ={
 		.fail(function(error){
 			alert("글수정 실패!!");
 		});
+	},
+	// 댓글 등록
+	replySave: function(){
+		// 데이터 가져오기 (boardId: 해당 게시글의 아이디 입니다.)
+			let data = {
+			boardId: $("#board-id").text(),
+			content: $("#reply-content").val()
+		}
+		console.log(data);
+		// ``(백틱)  (자바 스크립트 변수를 문자열 안에 넣어서 사용할수 있다.)
+		$.ajax({
+			type: "POST",
+			url: `/api/board/${data.boardId}/reply`,
+			data: JSON.stringify(data),
+			contentType: "application/json; charset=utf-8",
+			dataType: "json"
+			
+		})
+		.done(function (response){
+			if(response.status){
+				alert("댓글 쓰기 완료!!");	
+				location.href = (`/board/${data.boardId}`); 
+			}
+			
+		})
+		.fail(function(error){
+			alert("댓글 쓰기 실패!");
+		});
+	},
+	replyDelet: function(){
+
+	},
+	replyUpdate: function(){
+
 	}
 }
 
