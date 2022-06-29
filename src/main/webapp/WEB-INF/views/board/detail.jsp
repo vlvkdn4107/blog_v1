@@ -39,12 +39,11 @@
   
   <ul class="list-group" id="reply--box">
   	<c:forEach var="reply" items="${board.reply}">
-    <li class="list-group-item d-flex justify-content-between" id="reply--1">
+    <li class="list-group-item d-flex justify-content-between" id="reply--${reply.id}">
 	      <div>${reply.content}</div>
 	      <div class="d-flex">
 	        <div class = "m-2">작성자 : ${reply.user.username}&nbsp;&nbsp;</div>
 	        <button class="badge badge-danger m-2" id ="btn-reply-delete">삭제</button>
-	        
 	        <button class="badge badge-primary m-2"id ="btn-reply-update" >수정</button>
 	      </div>
 	    </li>  	

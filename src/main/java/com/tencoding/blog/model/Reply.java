@@ -35,7 +35,7 @@ public class Reply {
 	// 여러개의 댓글은 하나의 게시글에 존재할수있다.
 	@ManyToOne // Many == Reply, One == Board
 	@JoinColumn(name = "boardId")
-	@JsonIgnoreProperties({"board", "reply", "content","user","id", "userId"})
+	@JsonIgnoreProperties({"board","reply","userId"})
 	private Board board;
 
 	//여러개의 댓글은 하나의 user가 달수있다.

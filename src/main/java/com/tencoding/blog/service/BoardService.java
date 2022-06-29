@@ -60,15 +60,15 @@ public class BoardService {
 		// 더티체킹 하기
 	}
 	@Transactional
-	public Reply writeReply(User user, int baordId, Reply requestreply) {
+	public Reply writeReply(User user, int baordId, Reply requestreply) { // 매개변수가 많으니깐 다음에는 DTO를 활용하자
 		Board boardEntity =  boardRepository.findById(baordId).orElseThrow(()->{
 			return new IllegalArgumentException("댓글 쓰기 실패! : 해당 게시글이 존재하지 않습니다.");
 		});
 		
 		requestreply.setUser(user);
 		requestreply.setBoard(boardEntity);	
-		Reply replyEntity = replyRepository.save(requestreply);
-//		System.out.println("데이터 확인 댓글 : " + replyEntity);
+		Reply replyEntity = replyRepository.save(requestreply); // .save는 값을 리턴해준다.
+//		System.out.println("데이터 확인 댓글 : " + replyEntity); // << 이 sysout을 하면 무한참조 오류가 발생한다.
 		return replyEntity;
 	}
 }

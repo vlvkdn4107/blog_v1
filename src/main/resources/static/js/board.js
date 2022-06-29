@@ -99,7 +99,7 @@ let index ={
 		}
 		console.log(data);
 		// ``(백틱)  (자바 스크립트 변수를 문자열 안에 넣어서 사용할수 있다.)
-		$.ajax({
+		$.ajax({ // 새로고침없이 사용할려고 ajax를 쓴다.
 			type: "POST",
 			url: `/api/board/${data.boardId}/reply`,
 			data: JSON.stringify(data),
@@ -109,12 +109,13 @@ let index ={
 		})
 		.done(function (response){
 			if(response.status){
+				console.log(response.data)
 				addReplyElement(response.data); // 리스폰스에있는 data
 			}else{
 				
 			}
 			
-			console.log(response);
+			
 			/*
 			if(response.status){
 				alert("댓글 쓰기 완료!!");	
@@ -125,28 +126,21 @@ let index ={
 		.fail(function(error){
 			alert("댓글 쓰기 실패!");
 		});
-	},
-	replyDelet: function(){
-
-	},
-	replyUpdate: function(){
-
 	}
 }
 function addReplyElement(reply){
-	let chileElement = `<li class="list-group-item d-flex justify-content-between" id="reply--1">
-	    	  <div>${reply.content}</div>
-	    	  <div class="d-flex">
-	    	    <div class = "m-2">작성자 : ${reply.user.username}&nbsp;&nbsp;</div>
-	    	    <button class="badge badge-danger m-2" id ="btn-reply-delete">삭제</button>
-	        
-	     	    <button class="badge badge-primary m-2"id ="btn-reply-update" >수정</button>
-	    	  </div>
-	  	</li>`;
+	let childElement = `<li class="list-group-item d-flex justify-content-between" id="reply--${reply.id}">
+	      <div>${reply.content}</div>
+	      <div class="d-flex">
+	        <div class = "m-2">작성자 : ${reply.user.username}&nbsp;&nbsp;</div>
+	        <button class="badge badge-danger m-2" id ="btn-reply-delete">삭제</button>
+	        <button class="badge badge-primary m-2"id ="btn-reply-update" >수정</button>
+	      </div>
+	    </li>`;
 		
 	  	
-	  $("#reply--box").prepend(chileElement);	  
-	  	
+	  $("#reply--box").prepend(childElement);	  
+	  $("#reply-content").val("");
 }
 
 
