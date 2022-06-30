@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable() // csrf 란? 사용자는 인증받은 상태인데 악성사이트에서 접속을 해서          // !중요한거는 get방식으로 만들지 마라! POST방식으로 해라!
 		.authorizeRequests()
-		.antMatchers("/auth/**", "/", "/js/**", "/css/**", "/image/**") // 모든 주소가 막혔기때문에 허용 해줄것들을 뚫어준다.
+		.antMatchers("/auth/**", "/", "/js/**", "/css/**", "/image/**", "/dummy/**") // 모든 주소가 막혔기때문에 허용 해줄것들을 뚫어준다.// 로그인을 안해도 가능하게 만든다.
 		.permitAll()
 		.anyRequest()
 		.authenticated()
