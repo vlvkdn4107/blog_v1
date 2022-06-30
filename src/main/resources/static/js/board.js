@@ -12,9 +12,8 @@ let index ={
 		$("#btn-reply-save").bind("click",() =>{
 			this.replySave();
 		});
-		$("#btn-reply-delete").bind("click",() =>{
-			this.replyDelete();
-		});
+		
+		
 		$("#btn-reply-update").bind("click",() =>{
 			this.replyUpdate();
 		});
@@ -90,6 +89,8 @@ let index ={
 			alert("글수정 실패!!");
 		});
 	},
+	
+	
 	// 댓글 등록
 	replySave: function(){
 		// 데이터 가져오기 (boardId: 해당 게시글의 아이디 입니다.)
@@ -109,7 +110,6 @@ let index ={
 		})
 		.done(function (response){
 			if(response.status){
-				console.log(response.data)
 				addReplyElement(response.data); // 리스폰스에있는 data
 			}else{
 				
@@ -126,21 +126,54 @@ let index ={
 		.fail(function(error){
 			alert("댓글 쓰기 실패!");
 		});
+	},// end of replySave
+	
+	
+	replyDelete: function(boardId, replyId){
+		/*
+		console.log("boardId :" + boardId);
+		console.log("replyId :" + replyId);
+		*/
+			$.ajax({
+				type: "DELETE",
+				url: `/api/board/${boardId}/reply/${replyId}`,
+				dataType: "json"
+			})
+			.done(function(response){
+				console.log(response + " : response");
+				alert("댓글 삭제 성공!");
+				location.href=`/board/${boardId}`; // 비동기식으로 도전 해보기!
+			})
+			.fail(function(error){
+				console.log(error);
+				alert("댓글 삭제 실패!");
+			})
+			
+			
 	}
+	
 }
+// == (문자열,int 상관없이 같으면 ok) === (타입까지 다 맞아야 ok)
 function addReplyElement(reply){
-	let childElement = `<li class="list-group-item d-flex justify-content-between" id="reply--${reply.id}">
+	
+	let principalId = $("#principal--id").val();
+	
+	let childElement = ` <li class="list-group-item d-flex justify-content-between" id="reply--${reply.id}">
 	      <div>${reply.content}</div>
 	      <div class="d-flex">
-	        <div class = "m-2">작성자 : ${reply.user.username}&nbsp;&nbsp;</div>
-	        <button class="badge badge-danger m-2" id ="btn-reply-delete">삭제</button>
-	        <button class="badge badge-primary m-2"id ="btn-reply-update" >수정</button>
+	        <div class = "m-2">작성자 : ${reply.user.username}&nbsp;&nbsp;</div> 
+	        <c:if test="${reply.user.id == principalId}">
+	        	<button class="badge badge-danger m-2" onclick = "index.replyDelete(${reply.board.id}, ${reply.id});">삭제</button>
+	        </c:if>
+	        
 	      </div>
 	    </li>`;
 		
 	  	
 	  $("#reply--box").prepend(childElement);	  
 	  $("#reply-content").val("");
+	  console.log(reply.user.id == principalId);
+	  
 }
 
 

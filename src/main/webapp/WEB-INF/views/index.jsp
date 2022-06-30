@@ -17,11 +17,13 @@
 		<ul class="pagination justify-content-center">
 		  <c:set var="isDisabled" value = "disabled"></c:set>
 		  <c:set var="isNotDisabled" value = ""></c:set>
+		  
 		  <li class="page-item ${pageable.first ? isDisabled : isNotDisabled}">
 		  	<a class="page-link" href="/?page=${pageabled.number -1}">Previous</a>
 		  </li>
 		  <li class="page-item ${pageable.last ? isDisabled : isNotDisabled}">
-		  	<a class="page-link" href="/?page=${pageabled.number +1}">Next</a></li>
+		  	<a class="page-link" href="/?page=${pageabled.number +1}">Next</a>
+		  </li>
 		  
 		</ul>
  		<br/>

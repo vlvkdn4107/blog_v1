@@ -76,6 +76,8 @@ public class UserService {
 		});
 		return userEntity;
 	}
+	
+	
 //	@Transactional(readOnly = true)
 //	public User login(User user) {
 //		// 서비느느 레파지토리한테 select 시켜야한다.

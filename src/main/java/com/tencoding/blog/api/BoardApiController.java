@@ -44,6 +44,7 @@ public class BoardApiController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 	
+	// 댓글 쓰기
 	@PostMapping("/api/board/{boardId}/reply")
 	public ResponseDto<Reply> replySabe(@PathVariable int boardId, 
 			@RequestBody Reply reply, @AuthenticationPrincipal PrincipalDetail principalDetail){
@@ -51,4 +52,14 @@ public class BoardApiController {
 		Reply replyEntity = boardService.writeReply(principalDetail.getUser(),boardId, reply);
 		return new ResponseDto<Reply>(HttpStatus.OK.value(),replyEntity);
 	}
+	
+	// 댓글 삭제
+	// /api/board/${boardId}/reply/${replyId}
+	@DeleteMapping("/api/board/{boardId}/reply/{replyId}")
+	public ResponseDto<Integer> deleteReply(@PathVariable int boardId, @PathVariable int replyId){
+		boardService.deleteReplyById(replyId);
+		return new ResponseDto<>(HttpStatus.OK.value(), 1);
+	}
+	
+	
 }

@@ -71,4 +71,10 @@ public class BoardService {
 //		System.out.println("데이터 확인 댓글 : " + replyEntity); // << 이 sysout을 하면 무한참조 오류가 발생한다.
 		return replyEntity;
 	}
+	
+	@Transactional
+	public void deleteReplyById(int replyId) {
+		replyRepository.deleteById(replyId);
+	}
+	
 }

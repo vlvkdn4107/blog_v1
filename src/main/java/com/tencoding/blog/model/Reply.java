@@ -41,7 +41,7 @@ public class Reply {
 	//여러개의 댓글은 하나의 user가 달수있다.
 	@ManyToOne // Many == Reply, One == User
 	@JoinColumn(name = "userId") // userId이름으로 join해라 (즉 테이블의 컬럼명이 userId)
-	@JsonIncludeProperties({"password", "role", "oauth","email"})
+	@JsonIgnoreProperties({"password", "role", "oauth","email"})
 	private User user;
 	
 	@CreationTimestamp
