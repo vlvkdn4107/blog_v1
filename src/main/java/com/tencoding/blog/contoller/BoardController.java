@@ -26,7 +26,7 @@ public class BoardController {
 	private BoardService boardService;
 	
 	
-	@GetMapping({"","/","/board/search"}) // 쿼리 파라미터 방식을 받을거라고 해도 null 값이 있을경우가 있으면 null 값이 있어도 처리 해준다.
+	@GetMapping({"","/","/board/search"}) // 쿼리 파라미터 방식을 받을거라고 해도 param어노테이션을 안써도 null 값이 있을경우가 있으면 null 값이 있어도 처리 해준다.
 	public String home(String q, @PageableDefault(size = 5, sort ="id", direction = Direction.DESC)Pageable pageable , Model model) {
 		
 		String searchTitle = q == null ? "" : q; // q값이 null 이면 %% 있으면 %q% 이런 방식을 넘어온다.
