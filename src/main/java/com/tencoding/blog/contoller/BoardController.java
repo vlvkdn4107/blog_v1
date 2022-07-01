@@ -27,6 +27,7 @@ public class BoardController {
 	
 	@GetMapping({"","/"})
 	public String home(@PageableDefault(size = 5, sort ="id", direction = Direction.DESC)Pageable pageable , Model model) {
+		
 		Page<Board> pageBoards = boardService.getBoardList(pageable);
 		// 1. 현재 페이지에 앞뒤로 5 블록 (칸) 씩 보여야 한다.
 		// 2. 페이지 버튼(블록)을 누르면 해당 페이지로 화면을 이동해야 한다.
@@ -34,9 +35,15 @@ public class BoardController {
 //		int startPage = pageBoards.getPageable().getPageNumber() -2; // 현재
 //		int endPage = pageBoards.getPageable().getPageNumber() + 2;
 		
-		int nowPage = pageBoards.getPageable().getPageNumber() + 1; // 현재 페이지
-		int startPage = Math.max(nowPage - 2, 1); // 두 int 값 중에 큰 값을 반환 합니다.
+		// 현재
+		int nowPage = pageBoards.getPageable().getPageNumber();
+		// 시작
+		int startPage = Math.max(nowPage - 2, 1);
+		// 끝
 		int endPage = Math.min(nowPage + 2, pageBoards.getTotalPages());
+		
+	
+		
 		System.out.println("=======================================");
 		log.info("현재 화면에 블록 숫자(현재 페이지) : {}" , nowPage);
 		log.info("현재 화면에 보여질 블록의 시작 번호 : {}" , startPage);

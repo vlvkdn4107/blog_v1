@@ -4,7 +4,8 @@
 	<%@ include file = "layout/header.jsp" %>
 
 		<div class = "container">
-			<c:forEach var ="board" items = "${pageable.content}">
+			<c:forEach var ="board" items = "${pageable.conte
+			nt}">
 				<div class ="card m-2">
 					<div class = "card-body">
 						<h4 class = "card-title">${board.title}</h4>
@@ -21,6 +22,8 @@
 		  <li class="page-item ${pageable.first ? isDisabled : isNotDisabled}">
 		  	<a class="page-link" href="/?page=${pageable.number -1}">Previous</a>
 		  </li>
+		  
+		  
 		  <!--  if else문은 choose -->
 		  <c:forEach var="num" items="${pageNumbers}">
 		   <c:choose> 
@@ -32,7 +35,6 @@
 		   		<li class="page-item"><a class="page-link" href="/page=${num -1}">${num}</a></li>
 		   	</c:otherwise>
 		   </c:choose>
-		  	
 		  </c:forEach>		  
 		  
 		  
