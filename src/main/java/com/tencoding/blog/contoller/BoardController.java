@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tencoding.blog.model.Board;
 import com.tencoding.blog.service.BoardService;
@@ -25,10 +26,13 @@ public class BoardController {
 	private BoardService boardService;
 	
 	
-	@GetMapping({"","/"})
-	public String home(@PageableDefault(size = 5, sort ="id", direction = Direction.DESC)Pageable pageable , Model model) {
+	@GetMapping({"","/","/board/search"}) // 쿼리 파라미터 방식을 받을거라고 해도 null 값이 있을경우가 있으면 null 값이 있어도 처리 해준다.
+	public String home(String q, @PageableDefault(size = 5, sort ="id", direction = Direction.DESC)Pageable pageable , Model model) {
 		
-		Page<Board> pageBoards = boardService.getBoardList(pageable);
+		String searchTitle = q == null ? "" : q; // q값이 null 이면 %% 있으면 %q% 이런 방식을 넘어온다.
+		
+		Page<Board> pageBoards = boardService.searchBoardByTitle(searchTitle, pageable);
+
 		// 1. 현재 페이지에 앞뒤로 5 블록 (칸) 씩 보여야 한다.
 		// 2. 페이지 버튼(블록)을 누르면 해당 페이지로 화면을 이동해야 한다.
 		// 3. 현재 페이지에 'active'(활성화 (불들어오게) 하기
@@ -66,6 +70,7 @@ public class BoardController {
 		model.addAttribute("startPage",startPage);
 		model.addAttribute("endPage",endPage);
 		model.addAttribute("pageNumbers",pageNumbers);
+		model.addAttribute("searchTitle",searchTitle);
 		return "index";
 	}
 	
@@ -89,5 +94,26 @@ public class BoardController {
 		model.addAttribute("board", boardService.boardDetail(id));
 		return "/board/update_form";
 	}
+	
+	// board/search
+//	@GetMapping("/board/search")
+//	public String serchBaord(@RequestParam String q, Model model,
+//			@PageableDefault(size = 2, sort ="id", direction = Direction.DESC)Pageable pageable) {// 쿼리방식으로 넘어오기떄문에 RequestParam
+//		System.out.println(" q : " + q);
+//		Page<Board> pageBoards = boardService.searchBoardByTitle(q, pageable);
+//		int nowPage = pageBoards.getPageable().getPageNumber();
+//		int startPage = Math.max(nowPage - 2, 1);
+//		int endPage = Math.min(nowPage + 2, pageBoards.getTotalPages());	
+//		ArrayList<Integer> pageNumbers = new ArrayList<>();
+//		
+//		for (int i = startPage; i <= endPage; i++) {
+//			pageNumbers.add(i);
+//		}
+//		model.addAttribute("pageable", pageBoards);
+//		model.addAttribute("startPage",startPage);
+//		model.addAttribute("endPage",endPage);
+//		model.addAttribute("pageNumbers",pageNumbers);
+//		return "index";
+//	}
 	
 }
