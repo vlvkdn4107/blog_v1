@@ -24,7 +24,7 @@ let index ={
 	save: function(){
 		// 데이터 가져오기.
 		let data = {
-			title: $("#title").val(),
+			title: xSSCheck($("#title").val(), 1),
 			content: $("#content").val()
 		}
 		console.log(data);
@@ -175,6 +175,16 @@ function addReplyElement(reply){
 	  console.log(reply.user.id == principalId);
 	  
 }
+function xSSCheck(str, level) {
+    if (level == undefined || level == 0) {
+        str = str.replace(/\<|\>|\"|\'|\%|\;|\(|\)|\&|\+|\-/g,"");
+    } else if (level != undefined && level == 1) {
+        str = str.replace(/\</g, "&lt;");
+        str = str.replace(/\>/g, "&gt;");
+    }
+    return str;
+}
+
 
 
 index.init();
