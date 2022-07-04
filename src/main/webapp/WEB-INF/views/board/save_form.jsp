@@ -4,9 +4,9 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
     <div class="container">
-
+	
         <form action="">
-
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
             <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" class="form-control" placeholder="Enter title" name="title" id="title">

@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tencoding.blog.contoller.UserController;
 import com.tencoding.blog.model.RoleType;
 import com.tencoding.blog.model.User;
 import com.tencoding.blog.repository.UserRepository;
@@ -33,6 +34,8 @@ public class UserService {
 	@Autowired
 	private BCryptPasswordEncoder encoder;
 	
+
+	
 	@Transactional
 	public int saveUser(User user) {
 		// select
@@ -57,15 +60,28 @@ public class UserService {
 	
 	@Transactional
 	public void updateUser(User user) {
-		User userEntity = userRepository.findById(user.getId())
-				.orElseThrow(() -> {
-					return new IllegalArgumentException("회원 정보가 없습니다.");
-				});
-		// 해시 암호화 처리
-		String rawPassword = user.getPassword();
-		String hashPassword = encoder.encode(rawPassword);
-		userEntity.setPassword(hashPassword);
-		userEntity.setEmail(user.getEmail());
+		// 카카오가 수정이 들어오면 무시
+		// 기존 수정이 들어오면 처리
+//		if(user.getOauth() == null) {
+//			System.out.println("카카오가 아닐때");
+//			System.out.println(user.getOauth() + " 유저 Oauth");
+//		}else {
+//		System.out.println("카카오일때");
+//		System.out.println(user.getOauth() + " 유저 Oauth");
+//	}
+			User userEntity = userRepository.findById(user.getId())
+					.orElseThrow(() -> {
+						return new IllegalArgumentException("회원 정보가 없습니다.");
+					});
+			if(userEntity.getOauth() == null || userEntity.getOauth()== "") {
+				// 해시 암호화 처리
+				String rawPassword = user.getPassword();
+				String hashPassword = encoder.encode(rawPassword);
+				userEntity.setPassword(hashPassword);
+				userEntity.setEmail(user.getEmail());	
+			}
+				
+		
 		
 	}
 	

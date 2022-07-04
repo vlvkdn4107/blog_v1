@@ -2,6 +2,7 @@
 
 <div class="container">
 <input type= "hidden" id ="principal--id" value ="${principal.user.id}">
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
   <button class="btn bg-secondary" onclick="history.back();">돌아가기</button>
   <c:if test="${board.userId.id == principal.user.id}">
     <a href="/board/${board.id}/update_form" class="btn btn-warning">수정</a>

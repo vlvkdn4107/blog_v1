@@ -5,6 +5,7 @@
 
 <div class="container">
 	<form action="/auth/joinProc" method="post"><!--  form 으로 던진이유??  -->
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> <!--name은 키값 value는 값   -->
 	  <div class="form-group">
 	    <label for="username">User Name:</label>
 	    <input type="text" class="form-control" placeholder="Enter username" id="username" name = "username" />

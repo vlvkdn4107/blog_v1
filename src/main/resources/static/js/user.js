@@ -76,6 +76,10 @@ let index = {
 		
 //	},
 	update: function(){
+		
+		let token=$("meta[name='_csrf']").attr("content"); // 메디태그 안에 name 속성에 -csrf .attr(속성값) 
+		let header = $("meta[name='_csrf_header']").attr("content");
+		
 		let data = {
 			username: $("#username").val(),
 			id: $("#id").val(),
@@ -84,6 +88,11 @@ let index = {
 		}
 		console.log(data);
 		$.ajax({
+			beforeSend: function(xhr){// 이 함수가 실행하기전에 먼저 불러진다
+			console.log("xhr : " + xhr); // xhr = 자바스크립트 객체이다
+			xhr.setRequestHeader(header, token);
+			},	
+			
 			type: "PUT",
 			url: "/user",
 			data : JSON.stringify(data),

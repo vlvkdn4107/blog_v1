@@ -1,5 +1,7 @@
 package com.tencoding.blog.contoller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -57,12 +60,22 @@ public class UserController {
 			return "user/join_form";
 		}
 		
-		@GetMapping("/logout") 
-		public String logout() {
-			// 세션정보를 제거 (로그아웃 처리)
-			httpSession.invalidate();
+//		@GetMapping("/logout") 
+//		public String logout() {
+//			// 세션정보를 제거 (로그아웃 처리)
+//			httpSession.invalidate();
+//			return "redirect:/";
+//		}
+		// 시큐리티에 맡기지 말고 직접 처리 해 보자.
+		@GetMapping("/logout") // POST방식으로 안하더라고 Get방식으로 시큐리티ContextHolder를 사용하면 된다.
+		public String logout(HttpServletRequest request, HttpServletResponse reponse) {
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			if(authentication != null) {
+				new SecurityContextLogoutHandler().logout(request, reponse, authentication);
+			}
 			return "redirect:/";
 		}
+		
 		@GetMapping("/user/update_form")
 		public String updateForm() {
 			return "user/update_form";

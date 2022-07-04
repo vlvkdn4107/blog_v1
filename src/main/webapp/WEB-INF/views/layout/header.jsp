@@ -11,6 +11,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name = "${_csrf.parameterName}" content="${_csrf.token}">
+<meta name="_csrf_header" content="${_csrf.headerName}">
 <title>Insert title here</title>
 </head>
 <meta charset="UTF-8" />
@@ -41,7 +43,7 @@
       <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
         	<c:choose>
-        		<c:when test="${empty principal}}">
+        		<c:when test="${empty principal}">
         			<!-- empty sessionScope.principal (if문과 같다) -->
         			 <li class="nav-item">
 			            <a class="nav-link" href="/auth/login_form">로그인</a>
@@ -59,7 +61,7 @@
 		         </li>
 		         <li class="nav-item">
 		         <!-- 시큐리티를 적용하면 자동 로그아웃 처리가된다. -->
-		            <a class="nav-link" href="/logout">로그아웃</a>
+		            <a class="nav-link" href="/logout">로그아웃</a> <!--  POST 방식으로 바꿔줘야한다. -->
 		        </li>
         		</c:otherwise>
         	</c:choose>

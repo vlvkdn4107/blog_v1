@@ -27,6 +27,7 @@ public class UserApiController {
 	
 	@PutMapping("/user")
 	public ResponseDto<Integer> update(@RequestBody User user){
+		
 		userservice.updateUser(user);
 		// 강제로 Authentication 객체를 만들고 SecurityContext안에 집어 넣으면 된다.
 		// 1. Authentication 객체 생성

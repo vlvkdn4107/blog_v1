@@ -22,13 +22,24 @@ let index ={
 		
 	},
 	save: function(){
+		
+		let token=$("meta[name='_csrf']").attr("content");
+		let header= $("meta[name='_csrf_header']").attr("content");
+		console.log("token : " + token);
+		console.log("header : " + header);
 		// 데이터 가져오기.
 		let data = {
-			title: xSSCheck($("#title").val(), 1),
+			title: $("#title").val(),
 			content: $("#content").val()
 		}
+		
 		console.log(data);
 		$.ajax({
+			beforeSend: function(xhr){// 이 함수가 실행하기전에 먼저 불러진다
+			console.log("xhr : " + xhr); // xhr = 자바스크립트 객체이다
+			xhr.setRequestHeader(header, token);
+				
+			},
 			type: "POST",
 			url: "/api/board",
 			data: JSON.stringify(data),
@@ -93,14 +104,27 @@ let index ={
 	
 	// 댓글 등록
 	replySave: function(){
+		
+		// csrf 활성화 후에는 header에 token 값을 넣어야 정상 동작한다.
+		let token=$("meta[name='_csrf']").attr("content"); // 메디태그 안에 name 속성에 -csrf .attr(속성값) 
+		let header = $("meta[name='_csrf_header']").attr("content");
+		
+		console.log("token : " + token);
+		console.log("header : " + header);
 		// 데이터 가져오기 (boardId: 해당 게시글의 아이디 입니다.)
 			let data = {
-			boardId: $("#board-id").text(),
+			boardId: xSSCheck($("#board-id").text(),1),
 			content: $("#reply-content").val()
+			
 		}
 		console.log(data);
 		// ``(백틱)  (자바 스크립트 변수를 문자열 안에 넣어서 사용할수 있다.)
 		$.ajax({ // 새로고침없이 사용할려고 ajax를 쓴다.
+			beforeSend: function(xhr){// 이 함수가 실행하기전에 먼저 불러진다
+			console.log("xhr : " + xhr); // xhr = 자바스크립트 객체이다
+			xhr.setRequestHeader(header, token);
+				
+			},
 			type: "POST",
 			url: `/api/board/${data.boardId}/reply`,
 			data: JSON.stringify(data),
@@ -184,6 +208,7 @@ function xSSCheck(str, level) {
     }
     return str;
 }
+
 
 
 

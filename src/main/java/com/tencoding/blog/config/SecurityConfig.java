@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import com.tencoding.blog.auth.PrincipalDetailService;
 
@@ -38,13 +39,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	// 오버라이드 해야한다.
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable() // csrf 란? 사용자는 인증받은 상태인데 악성사이트에서 접속을 해서          // !중요한거는 get방식으로 만들지 마라! POST방식으로 해라!
+//		http.csrf().disable() // csrf 란? 사용자는 인증받은 상태인데 악성사이트에서 접속을 해서          // !중요한거는 get방식으로 만들지 마라! POST방식으로 해라!
+		// 다른 도메인에서 오는걸  걸러주는 기능
+		// 마지막에 처리하는게 좋다!
+		http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+		.and() // and는 말 그대로 and
+		// 커뮤니션 관련
 		.authorizeRequests()
 		.antMatchers("/auth/**", "/", "/js/**", "/css/**", "/image/**", "/dummy/**", "/test/**") // 모든 주소가 막혔기때문에 허용 해줄것들을 뚫어준다.// 로그인을 안해도 가능하게 만든다.
 		.permitAll()
 		.anyRequest()
 		.authenticated()
 		.and()
+		// 로그인 관련
 		.formLogin()
 		.loginPage("/auth/login_form")// 인증이 안되있으면 로그인 페이지로 돌아가라고 설정 한거다.
 		.loginProcessingUrl("/auth/loginProc")
