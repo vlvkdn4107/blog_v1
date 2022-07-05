@@ -32,7 +32,6 @@ public class StoryCotroller {
 			return "/story/upload";
 		}
 		@PostMapping("/image/upload") // 마인타입인 멀티 타입으로 넘어온다.
-		@ResponseBody
 //		public String storyImageUpload(MultipartFile file, String storyText) {
 		public String storyImageUpload(RequestFileDto fileDto, @AuthenticationPrincipal PrincipalDetail principalDetail) { // 파일 타입을 받을려면 // .jsp 파일에 name 값과 같아야한다.
 			storyService.ImageUpload(fileDto,principalDetail.getUser());
@@ -56,7 +55,7 @@ public class StoryCotroller {
 			// 2의 제곱으로 된 단위를 사용한다.
 			
 			
-			return "upload Test";
+			return "/story/home";
 		}
 		
 }

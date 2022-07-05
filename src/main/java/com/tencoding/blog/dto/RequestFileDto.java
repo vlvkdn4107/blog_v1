@@ -18,11 +18,11 @@ public class RequestFileDto {
 	// private MutipartFile[] file;
 	private MultipartFile file;
 	private String uuid; // 고유한 파일 이름을 만들기 위한 속성
-	private String stoyText;
+	private String storyText;
 	
 	public Image toEntity(String storyImageUrl, User user) {
 		return Image.builder()
-				.storyText(stoyText)
+				.storyText(storyText)
 				.storyImageUrl(storyImageUrl)
 				.originFileName(file.getOriginalFilename())
 				.user(user)

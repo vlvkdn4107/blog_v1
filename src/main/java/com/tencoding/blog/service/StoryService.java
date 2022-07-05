@@ -6,11 +6,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.tencoding.blog.dto.RequestFileDto;
+import com.tencoding.blog.model.Image;
 import com.tencoding.blog.model.User;
 import com.tencoding.blog.repository.StoryRepository;
 
@@ -21,9 +24,11 @@ public class StoryService {
 	@Value("${file.path}")
 	private String uploadFolder;
 	
+	@Autowired
+	private StoryRepository storyRepository;
 	
 	
-	
+	@Transactional
 //	storyService.imageUpload(fileDto,principalDetail);
 	public void ImageUpload(RequestFileDto fileDto, User user) {
 		// 파일 업로드 기능 이기 때문에 해당 서버에 바이너리를 받아서 파일을 생성하고 성공하면 DB에 저장할거다.
@@ -38,6 +43,10 @@ public class StoryService {
 		
 		try {
 			Files.write(imageFilePath, fileDto.getFile().getBytes());
+			
+			// 저장이 성공했다면 DB에 저장 하는 코드
+			Image imageEntity =  fileDto.toEntity(imageFileName, user);
+			storyRepository.save(imageEntity);
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("Filse 오류!!");
