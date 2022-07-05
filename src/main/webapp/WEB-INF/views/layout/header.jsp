@@ -26,7 +26,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-     
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"></head>
   </head>
   <body>
     
@@ -65,14 +65,26 @@
 		        </li>
         		</c:otherwise>
         	</c:choose>
-        
- 
+        	
+        	  <li class="nav-item dropdown">
+        	  	<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+        	  	STROY
+        	  	</a>
+        	  	<ul class="dropdown-menu">
+        	  		<li class="nav-item">
+        	  			<a href="/story/home" class="dropdown-item text-primary">
+        	  		        <i class="fas fa-cloud"></i>&nbsp;&nbsp;SHOW STORY
+        	  		    </a>
+        	  		</li>
+        	  		<li class="nav-item">
+        	  			 <a href="/story/upload" class="dropdown-item text-primary"> 
+        	  				<span><i class="fas fa-file"></i>&nbsp;&nbsp;UPLOAD</span>
+        	  			 </a>
+        	  		</li>
+        	  	</ul>
+        	  </li>
         </ul>
       </div>
     </nav>
-    <br />
     <!-- body 부분이 생성되고 밑으로 흐름을 따라내려오기때문에 마지막에 해줘야한다 이게 인터프린터이다 
      자바스크립트는 반정도의 컴파일과정을 거친다. 이유는 성능개선을 위해서 구글이 해놓음-->
- 
-</body>
-</html>

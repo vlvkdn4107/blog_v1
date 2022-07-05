@@ -1,5 +1,10 @@
-let token = $("meta[name='_csrf']").attr("content");
+let token = $("meta[name='_csrf']").attr("content");// 메디태그 안에 name 속성에 -csrf .attr(속성값)
 let header = $("meta[name='_csrf_header']").attr("content");
+let data = {
+			title: $("#title").val(),
+			content: $("#content").val()};
+
+
 
 let index ={
 	init: function(){
@@ -31,10 +36,7 @@ let index ={
 		console.log("token : " + token);
 		console.log("header : " + header);
 		// 데이터 가져오기.
-		let data = {
-			title: $("#title").val(),
-			content: $("#content").val()
-		}
+		data;
 		
 		console.log(data);
 		$.ajax({
@@ -54,16 +56,15 @@ let index ={
 			if(data.status){
 				alert("글쓰기 완료!!");	
 				location.href = ("/"); 
-			}
-			
+			}	
 		})
 		.fail(function(error){
 			alert("글쓰기 실패!");
 		});
 	},
 	deleteById: function(){
-		let token = $("meta[name = '_csrf']").attr("content");
-		let header = $("meta[name = '_csrf_header']").attr("content");
+		token;
+		header;
 		
 		let id = $("#board-id").text(); // .text 컨텐츠안에있는 text 놈을 들고온다.
 			$.ajax({
@@ -89,14 +90,11 @@ let index ={
 		
 	},
 	update: function(){
-		let token=$("meta[name='_csrf']").attr("content"); // 헤더에 crsf가 존재하기 떄문에 detail.jsp에서는 따로 input태그로 하이드 속성을 가진 crsf를 설정 안해주도 된다
-		let header= $("meta[name='_csrf_header']").attr("content");
+		token;
+		header;
 		
 		let boardId = $("#id").val();
-		let data = {
-			title: $("#title").val(),
-			content: $("#content").val()
-		}
+		data;
 		$.ajax({
 			beforeSend: function(xhr){// 이 함수가 실행하기전에 먼저 불러진다
 			console.log("xhr : " + xhr); // xhr = 자바스크립트 객체이다
@@ -127,8 +125,9 @@ let index ={
 	replySave: function(){
 		
 		// csrf 활성화 후에는 header에 token 값을 넣어야 정상 동작한다.
-		let token=$("meta[name='_csrf']").attr("content"); // 메디태그 안에 name 속성에 -csrf .attr(속성값) 
-		let header = $("meta[name='_csrf_header']").attr("content");
+		token;
+		header;  
+		
 		
 		console.log("token : " + token);
 		console.log("header : " + header);
@@ -179,13 +178,13 @@ let index ={
 		console.log("boardId :" + boardId);
 		console.log("replyId :" + replyId);
 		*/
-		let token=$("meta[name='_csrf']").attr("content"); // 헤더에 존재하기 떄문에 detail.jsp에서는 따로 input태그로 하이드 속성을 가진 crsf를 설정 안해주도 된다
-		let header= $("meta[name='_csrf_header']").attr("content");
+		token;
+		header; 
 		
 			$.ajax({
 				beforeSend: function(xhr){// 이 함수가 실행하기전에 먼저 불러진다
-			console.log("xhr : " + xhr); // xhr = 자바스크립트 객체이다
-			xhr.setRequestHeader(header, token);
+				console.log("xhr : " + xhr); // xhr = 자바스크립트 객체이다
+				xhr.setRequestHeader(header, token);
 			},
 				
 				type: "DELETE",
@@ -237,6 +236,7 @@ function xSSCheck(str, level) {
     }
     return str;
 }
+
 
 
 

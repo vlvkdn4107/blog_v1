@@ -46,5 +46,16 @@ spring:
       name: test
       password: 1234
       
-tenco:
+  servlet: 
+    multipart:
+      max-file-size: 20MB # 파일 하나의 최대 용량
+      max-request-size: 200MB # 동시에 보낼 수 있는 파일 용량
+        
+        
+      
+#해당 경로가 없으면 오류가 난다! (아니면 자바 코드로 경로 만드는 코드를 짜면된다)
+file: 
+  path: C:/springimageDir/tencoBlog/upload/
+      
+tenco: 
   key: e449231c34822d52eb44308a89d9d4a7b355fff31484d1f5a2f0f73cb8b3c587035c1b8399676c32e02e2eb061d3735346191dafcb652e2850abba0ca27856e4    
