@@ -1,4 +1,4 @@
-package com.tencoding.blog.contoller;
+package com.tencoding.blog.test;
 
 import java.util.List;
 
@@ -33,7 +33,7 @@ public class DummyControllerTest {
 	@PostMapping("/dummy/join")
 	public String join(@RequestBody User user) {
 		System.out.println("========================");
-		System.out.println(user.getUserName());
+//		System.out.println(user.getUserName());
 		System.out.println(user.getPassword());
 		System.out.println(user.getEmail());
 		System.out.println("========================");
@@ -79,7 +79,7 @@ public class DummyControllerTest {
 	// 정렬은 id로 할꺼다
 	//Direction.DESC 최신값
 	@GetMapping("/dummy/user")
-	public Page<User> pageList(@PageableDefault(size = 2, sort = "id", direction = Direction.DESC)Pageable pageable){
+	public Page<User> pageList(@PageableDefault(size = 1, sort = "id", direction = Direction.DESC)Pageable pageable){
 		
 	 // 둘중에 원하는걸로 return 하면된다.
 //		Page<User> pageuser = userRepository.findAll(pageable);

@@ -28,8 +28,8 @@ public class User {
 	@Id // 프라이머리키
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // 프로젝트에 연결된 DB의 넘버링 전략을 따라가겠다.
 	private int id;
-	@Column(nullable = false, length = 30) // null이 안되고 최대 30자까지
-	private String userName;
+	@Column(nullable = false, length = 100, unique = true) // null이 안되고 최대 30자까지 unique 보존성 (같은 이름으로 회원가입 안됌!)
+	private String username;
 	@Column(nullable = false, length = 100)
 	private String password;
 	@Column(nullable = false, length = 50)
@@ -39,6 +39,9 @@ public class User {
 	// Enum 타입 쓰는 이유 DOMAIN - 데이터의 범주화(User, ueer 이렇게 잘 못 쓸수가있다) 때문이다.
 	@Enumerated(EnumType.STRING)// enum 클래스로 만들었기 때문에 알려줘야한다!
 	private RoleType role;
+
+	private String Oauth; // kakao , google, naver ... 
+	
 	@CreationTimestamp // 시간이 자동으로 입력된다.
 	private Timestamp createDate;
 
